@@ -1,14 +1,14 @@
-// export const simpleAction = () => dispatch => {
-//     dispatch({
-//         type: 'SIMPLE_ACTION',
-//             payload: 'result_of_simple_action'
-//     })
-// }
-
-let nextId = 0;
-
-export const addItem = text => ({
+export const addItem = ad => ({
   type: 'ADD_ITEM',
-  id: nextId++,
-  text
-})
+  ...ad
+});
+
+export const updateItem = ad => ({
+  type: 'UPDATE_ITEM',
+  ...ad
+});
+
+export const deleteItem = id => ({
+  type: 'DELETE_ITEM',
+  id: id
+});

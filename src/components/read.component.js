@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import SingleAd from "./singleAd";
+import {deleteItem} from "../actions";
+import {connect} from "react-redux";
 
-export default class Read extends Component {
+class Read extends Component {
 
     constructor(props) {
         super(props);
@@ -25,6 +27,8 @@ export default class Read extends Component {
             ads.ads = ads.ads.filter((x) => x.id !== id);
             if (ads.ads)
                 this.setState({ads: ads.ads});
+
+            this.props.deleteItem(id);
             localStorage.setItem('ads', JSON.stringify(ads));
         }
     }
@@ -36,7 +40,7 @@ export default class Read extends Component {
     render() {
         return (
             <div>
-                <h3 align="left">Список объявлений</h3>
+                <h3>Список объявлений</h3>
                 <table className="table table-striped" style={{ marginTop: 20 }}>
                     <thead>
                     <tr>
@@ -55,3 +59,15 @@ export default class Read extends Component {
         )
     }
 }
+
+
+const mapDispatchToProps = dispatch => ({
+    deleteItem: (arg) => dispatch(deleteItem(arg))
+});
+
+const mapStateToProps = state => ({
+    ...state
+});
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Read);

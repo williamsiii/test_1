@@ -8,24 +8,16 @@ const adReds = (state = [], action) => {
           text: action.text,
           completed: false
         }
-      ]
+      ];
     case 'UPDATE_ITEM':
-        return state
-      // return state.map(todo =>
-      //   (todo.id === action.id)
-      //     ? {...todo, completed: !todo.completed}
-      //     : todo
-      // )
+        return state.map(ad =>
+            (ad.id === action.ad.id) ? action.ad : ad
+        );
     case 'DELETE_ITEM':
-        return state
-        // return state.map(todo =>
-      //   (todo.id === action.id)
-      //     ? {...todo, completed: !todo.completed}
-      //     : todo
-      // )
+        return state.filter(ad => (ad.id !== action.id));
     default:
       return state
   }
-}
+};
 
 export default adReds

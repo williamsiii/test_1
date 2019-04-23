@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Form from "./form";
+import {updateItem} from "../actions";
+import {connect} from "react-redux";
 
-export default class Update extends Component {
+class Update extends Component {
 
     constructor(props) {
         super(props);
@@ -66,17 +68,20 @@ export default class Update extends Component {
     }
 
     onSubmit() {
+        const updatedAd = {
+            id: this.id,
+            title: this.state.title,
+            description: this.state.description,
+            number: this.state.number,
+            city: this.state.city,
+            image: this.state.image
+        };
         this.ads.ads = this.ads.ads.map((x) => {
-            return x.id === this.id ?
-                {
-                    id: x.id,
-                    title: this.state.title,
-                    description: this.state.description,
-                    number: this.state.number,
-                    city: this.state.city,
-                    image: this.state.image
-                } : x;
+            return x.id === this.id ? updatedAd : x;
         });
+
+        this.props.updateItem({ad:updatedAd});
+
         const ads = JSON.stringify(this.ads);
         localStorage.setItem('ads', ads);
 
@@ -101,3 +106,15 @@ export default class Update extends Component {
         )
     }
 }
+
+
+const mapDispatchToProps = dispatch => ({
+    updateItem: (arg) => dispatch(updateItem(arg))
+});
+
+const mapStateToProps = state => ({
+    ...state
+});
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Update);

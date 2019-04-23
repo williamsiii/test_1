@@ -7,8 +7,12 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import configureStore from './store';
 
+
+// получаемый сохранённое состояние или создаём пустое
+const ads = localStorage.getItem('ads') ? JSON.parse(localStorage.getItem('ads')).ads : [];
+
 ReactDOM.render(
-    <Provider store={configureStore()}>
+    <Provider store={configureStore(ads)}>
         <BrowserRouter>
             <App />
         </BrowserRouter>

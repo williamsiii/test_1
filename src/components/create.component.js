@@ -61,7 +61,7 @@ class Create extends Component {
         };
         ads.ads.push(newAd);
             
-        this.props.addItem(ads.ads);
+        this.props.addItem({ads:newAd});
 
         localStorage.setItem('ads', JSON.stringify(ads));
         this.setState({
@@ -94,7 +94,11 @@ class Create extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addItem: () => dispatch(addItem())
-})
+    addItem: (arg) => dispatch(addItem(arg))
+});
 
-export default connect({},mapDispatchToProps)(Create);
+const mapStateToProps = state => ({
+    ...state
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(Create);
