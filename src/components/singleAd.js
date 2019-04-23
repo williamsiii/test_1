@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Loader from './img/loader.gif';
+import loader from '../img/loader.gif';
 
 
 class SingleAd extends Component {
@@ -15,11 +15,22 @@ class SingleAd extends Component {
     }
 
     componentDidMount() {
-        const rnd = Math.floor(Math.random() * 3);
+        this.getAuthore();
+    }
 
-        fetch(`my-json-server.typicode.com/williamsiii/test_1/authors/${rnd}`)
+    getAuthore(){
+        const rnd = Math.floor(Math.random() * 3) + 1;
+
+        fetch(`http://my-json-server.typicode.com/williamsiii/test_1/authors/${rnd}`,
+            {
+                mode: "cors",
+                method: "GET",
+                headers: {
+                    "Accept": "application/json"
+                }
+            })
             .then(response => response.json())
-            .then(result => this.setState({isLoaded: true, author: result.name}))
+            .then(data => this.setState({isLoaded: true, author: data.name}))
             .catch(e => console.log(e));
     }
 
@@ -40,9 +51,9 @@ class SingleAd extends Component {
                 </td>
                 <td>
                     {!this.state.isLoaded ?
-                        <Loader/>
+                        <img width="40" height="30" src={loader} alt="loading..." />
                         :
-
+                        this.state.author
                     }
                 </td>
                 <td>
