@@ -1,0 +1,16 @@
+{
+  "authors": [
+    {
+      "id": 1,
+      "name": "I. Ivanov"
+    },
+    {
+      "id": 2,
+      "name": "P. Petrov"
+    },
+    {
+      "id": 3,
+      "name": "S. Sidorov"
+    }
+  ]
+}

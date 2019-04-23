@@ -48,6 +48,7 @@ class Read extends Component {
                         <th>Описание</th>
                         <th>Телефон</th>
                         <th>Город</th>
+                        <th>Автор</th>
                         <th colSpan="2">Действие</th>
                     </tr>
                     </thead>
