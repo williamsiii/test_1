@@ -3,10 +3,10 @@ import thunk from 'redux-thunk';
 import adReds from './reducers/adReducers';
 
 
-export default function configureStore(initialState = []) {
+export default function configureStore(init = {adsList: []}) {
     return createStore(
         adReds,
-        initialState,
+        {...init},
         applyMiddleware(thunk)
     );
 }

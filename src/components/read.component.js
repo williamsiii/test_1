@@ -34,7 +34,7 @@ class Read extends Component {
     }
 
     rows(){
-        return this.state.ads.map((object, i) => <SingleAd obj={object} onDelete={(e) => this.onDelete(e)} key={i} />);
+        return this.props.ads.map((object, i) => <SingleAd obj={object} onDelete={(e) => this.onDelete(e)} key={i} />);
     }
 
     render() {
@@ -67,7 +67,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-    ...state
+    ads: state.adsList
 });
 
 

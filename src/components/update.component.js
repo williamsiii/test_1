@@ -112,9 +112,5 @@ const mapDispatchToProps = dispatch => ({
     updateItem: (arg) => dispatch(updateItem(arg))
 });
 
-const mapStateToProps = state => ({
-    ...state
-});
 
-
-export default connect(mapStateToProps,mapDispatchToProps)(Update);
+export default connect(() => ({}), mapDispatchToProps)(Update);

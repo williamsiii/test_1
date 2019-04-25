@@ -10,9 +10,11 @@ import configureStore from './store';
 
 // получаемый сохранённое состояние или создаём пустое
 const ads = localStorage.getItem('ads') ? JSON.parse(localStorage.getItem('ads')).ads : [];
+const init = {adsList: ads};
+
 
 ReactDOM.render(
-    <Provider store={configureStore(ads)}>
+    <Provider store={configureStore({...init})}>
         <BrowserRouter>
             <App />
         </BrowserRouter>

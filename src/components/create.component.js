@@ -97,8 +97,4 @@ const mapDispatchToProps = dispatch => ({
     addItem: (arg) => dispatch(addItem(arg))
 });
 
-const mapStateToProps = state => ({
-    ...state
-});
-
-export default connect(mapStateToProps,mapDispatchToProps)(Create);
+export default connect(() => ({}), mapDispatchToProps)(Create);

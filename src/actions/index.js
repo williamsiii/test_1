@@ -10,5 +10,11 @@ export const updateItem = ad => ({
 
 export const deleteItem = id => ({
   type: 'DELETE_ITEM',
-  id: id
+  id
 });
+
+export const assignAdToAuthor = (adId, name) => ({
+    type: 'ASSIGN_AD',
+    adId,
+    name
+})
