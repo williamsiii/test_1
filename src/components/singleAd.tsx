@@ -4,9 +4,13 @@ import loader from '../img/loader.gif';
 import {connect} from "react-redux";
 import {assignAdToAuthor} from '../actions';
 
-class SingleAd extends Component {
+interface singleAdState {
+    isLoaded: boolean
+}
 
-    constructor(props){
+class SingleAd extends React.Component<any, singleAdState> {
+
+    constructor(props: any){
         super(props);
 
         this.state = {
@@ -24,7 +28,7 @@ class SingleAd extends Component {
 
         try {
 
-            let resp = await fetch(`http://my-json-server.typicode.com/williamsiii/test_1/authors/${rnd}`,
+            const resp = await fetch(`http://my-json-server.typicode.com/williamsiii/test_1/authors/${rnd}`,
                 {
                     mode: "cors",
                     method: "GET",
@@ -33,9 +37,9 @@ class SingleAd extends Component {
                     }
                 })
 
-            resp = await resp.json();
+            const list: any = await resp.json();
             // прикрепляем объявление к автору
-            this.props.assignAdToAuthor(this.props.obj.id, resp.name);
+            this.props.assignAdToAuthor(this.props.obj.id, list.name);
             this.setState({isLoaded: true})
         } catch(err) {
             console.log(err);
@@ -76,8 +80,8 @@ class SingleAd extends Component {
 }
 
 
-const mapDispatchToProps = dispatch => ({
-    assignAdToAuthor: (id, name) => dispatch(assignAdToAuthor(id, name))
+const mapDispatchToProps = (dispatch: any) => ({
+    assignAdToAuthor: (id: number, name: string) => dispatch(assignAdToAuthor(id, name))
 });
 
 export default connect(() => ({}), mapDispatchToProps)(SingleAd);
