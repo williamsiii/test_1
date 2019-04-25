@@ -10,7 +10,7 @@ import configureStore from './store';
 
 // получаемый сохранённое состояние или создаём пустое
 const ads = localStorage.getItem('ads') ? JSON.parse(localStorage.getItem('ads')).ads : [];
-const init = {adsList: ads};
+const init = {adsList: ads, page: 0, pageSize: 3, totalPages: Math.ceil(ads.length / 3)};
 
 
 ReactDOM.render(

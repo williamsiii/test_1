@@ -15,10 +15,13 @@ class SingleAd extends Component {
     }
 
     componentDidMount() {
+        console.log('mount')
+        console.log(this.props.obj.id)
         this.getAuthor();
     }
 
     async getAuthor(){
+        // случайным образом получаем автора для объявления
         const rnd = Math.floor(Math.random() * 3) + 1;
 
         try {
@@ -33,6 +36,7 @@ class SingleAd extends Component {
                 })
 
             resp = await resp.json();
+            // прикрепляем объявление к автору
             this.props.assignAdToAuthor(this.props.obj.id, resp.name);
             this.setState({isLoaded: true})
         } catch(err) {

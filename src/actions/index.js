@@ -18,3 +18,8 @@ export const assignAdToAuthor = (adId, name) => ({
     adId,
     name
 })
+
+export const changePage = (page) => ({
+    type: 'CHANGE_PAGE',
+    page
+})

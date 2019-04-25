@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SingleAd from "./singleAd";
-import {deleteItem} from "../actions";
+import {deleteItem, changePage} from "../actions";
 import {connect} from "react-redux";
 
 class Read extends Component {
@@ -34,7 +34,18 @@ class Read extends Component {
     }
 
     rows(){
-        return this.props.ads.map((object, i) => <SingleAd obj={object} onDelete={(e) => this.onDelete(e)} key={i} />);
+        const pageSize = this.props.store.pageSize;
+        const pageNum = this.props.store.page
+        const rows = this.props.store.adsList.slice( pageSize * pageNum, pageSize * (pageNum + 1) );
+        return rows.map((object, i) => <SingleAd obj={object} onDelete={(e) => this.onDelete(e)} key={pageSize * pageNum + i} />);
+    }
+
+    onPrevPage() {
+        this.props.changePage(--this.props.store.page);
+    }
+
+    onNextPage() {
+        this.props.changePage(++this.props.store.page);
     }
 
     render() {
@@ -56,6 +67,8 @@ class Read extends Component {
                     { this.rows() }
                     </tbody>
                 </table>
+                <button className="btn" onClick={() => this.onPrevPage()} >Назад</button>
+                <button className="btn" onClick={() => this.onNextPage()} >Вперёд</button>
             </div>
         )
     }
@@ -63,11 +76,12 @@ class Read extends Component {
 
 
 const mapDispatchToProps = dispatch => ({
-    deleteItem: (arg) => dispatch(deleteItem(arg))
+    deleteItem: (arg) => dispatch(deleteItem(arg)),
+    changePage: (page) => dispatch(changePage(page))
 });
 
 const mapStateToProps = state => ({
-    ads: state.adsList
+    store: state
 });
 
 
